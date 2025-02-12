@@ -20,6 +20,10 @@ namespace BookAndDrive.Infrastructure.Data
         public DbSet<Order> Orders { get; set; }
         public DbSet<ExtraType> ExtraTypes { get; set; }
         public DbSet<OrderExtras> OrderExtras { get; set; }
+        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<CarStatus> CarStatuses { get; set; }
+        public DbSet<Car> Cars { get; set; }
+        public DbSet<OrderCar> OrderCars { get; set; }
        
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
