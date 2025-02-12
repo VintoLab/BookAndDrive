@@ -17,6 +17,8 @@ namespace BookAndDrive.Infrastructure.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Order> Orders { get; set; }
+       
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
