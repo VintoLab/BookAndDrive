@@ -7,11 +7,14 @@ using System.Threading.Tasks;
 
 namespace BookAndDrive.Application.DTOs
 {
-    public class LoginUserDto
+    public class UserInfoDto
     {
-        [Required]
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public string Email { get; set; }
-        [Required]
+        [MaxLength(25)]
+        [MinLength(8)]
         public string Password { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
