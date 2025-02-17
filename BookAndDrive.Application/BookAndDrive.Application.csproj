@@ -1,6 +1,10 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BookAndDrive.Domain\BookAndDrive.Domain.csproj" />
   </ItemGroup>
 

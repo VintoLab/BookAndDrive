@@ -6,6 +6,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\BookAndDrive.Domain\BookAndDrive.Domain.csproj" />
+    <ProjectReference Include="..\BookAndDrive.Application\BookAndDrive.Application.csproj" />
   </ItemGroup>
 
   <PropertyGroup>
