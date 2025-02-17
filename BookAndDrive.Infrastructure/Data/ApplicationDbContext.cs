@@ -30,16 +30,34 @@ namespace BookAndDrive.Infrastructure.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<User>().HasData(
-                new User
+            modelBuilder.Entity<CarStatus>().HasData(
+                new CarStatus
                 {
                     Id = 1,
-                    FirstName = "Petro",
-                    LastName = "Shchur",
-                    Email = "petro.shchur@gmail.com",
-                    Password = "12344321",
-                    PhoneNumber = "+48732657392",
-                    Role = "User",
+                    Name = "Available",
+                }
+                );
+
+            modelBuilder.Entity<CarType>().HasData(
+                new CarType
+                {
+                    Id = 1,
+                    Name = "Van",
+                }
+                );
+
+            modelBuilder.Entity<Car>().HasData(
+                new Car
+                {
+                    Id = 1,
+                    Seats = 4,
+                    Transmission = "Automatic",
+                    Brand = "Renault",
+                    Year = 2024,
+                    VIN = "12345678912345678",
+                    Price = 10.0M,
+                    CarTypeId = 1,
+                    CarStatusId = 1
                 }
                 );
         }

@@ -12,7 +12,6 @@ namespace BookAndDrive.Domain.Entities
         [Key]
         public int Id { get; set; }
         public string Name { get; set; }
-        [Range(0, 100000000)]
         public decimal Price { get; set; }
     }
 }

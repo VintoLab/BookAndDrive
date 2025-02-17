@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookAndDrive.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250212164120_AddAllTablesForCars")]
-    partial class AddAllTablesForCars
+    [Migration("20250217201929_AddAllTablesInNewDB")]
+    partial class AddAllTablesInNewDB
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -98,6 +98,20 @@ namespace BookAndDrive.Infrastructure.Migrations
                     b.HasIndex("CarTypeId");
 
                     b.ToTable("Cars");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Brand = "Renault",
+                            CarStatusId = 1,
+                            CarTypeId = 1,
+                            Price = 10.0m,
+                            Seats = 4,
+                            Transmission = "Automatic",
+                            VIN = "12345678912345678",
+                            Year = 2024
+                        });
                 });
 
             modelBuilder.Entity("BookAndDrive.Domain.Entities.CarStatus", b =>
@@ -115,6 +129,13 @@ namespace BookAndDrive.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarStatuses");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Available"
+                        });
                 });
 
             modelBuilder.Entity("BookAndDrive.Domain.Entities.CarType", b =>
@@ -132,6 +153,13 @@ namespace BookAndDrive.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("CarTypes");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Van"
+                        });
                 });
 
             modelBuilder.Entity("BookAndDrive.Domain.Entities.ExtraType", b =>
@@ -283,18 +311,6 @@ namespace BookAndDrive.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Email = "petro.shchur@gmail.com",
-                            FirstName = "Petro",
-                            LastName = "Shchur",
-                            Password = "12344321",
-                            PhoneNumber = "+48732657392",
-                            Role = "User"
-                        });
                 });
 
             modelBuilder.Entity("BookAndDrive.Domain.Entities.Address", b =>
