@@ -74,6 +74,26 @@ namespace BookAndDrive.API.Controllers
             return NoContent();
         }
 
+        //[Authorize(Roles = "User")]
+        [HttpPost("{id}/upload-licence")]
+        public IActionResult UploadDriverLicence(int id, [FromBody] UserDriverLicenceDto licenceDto)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.Id == id);
+
+            if (user == null)
+                return NotFound("User not Found.");
+
+            user.DriverLicenceFirst = licenceDto.DriverLicenceFirst;
+            user.DriverLicenceSecond = licenceDto.DriverLicenceSecond;
+            user.IsDriverLicenceVerified = false;
+
+            _db.Users.Update(user);
+            _db.SaveChanges();
+
+            return Ok("The driver's licence has been uploaded. The check is pending.");
+        }
+
+
 
         #region HashPassword
 

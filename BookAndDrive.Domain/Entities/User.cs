@@ -27,7 +27,7 @@ namespace BookAndDrive.Domain.Entities
         public string Role { get; set; } = "User";
         public byte[]? DriverLicenceFirst { get; set; }
         public byte[]? DriverLicenceSecond { get; set; }
-        public bool? IsDriverLicenceVerified { get; set; }
+        public bool? IsDriverLicenceVerified { get; set; } = false;
 
         [ValidateNever]
         public IEnumerable<Address> UserAddresses { get; set; }
