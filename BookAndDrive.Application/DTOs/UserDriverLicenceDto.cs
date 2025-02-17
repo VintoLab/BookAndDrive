@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookAndDrive.Application.DTOs
 {
-    public class UserDriverLicenceDto
+    public class UserDriverLicenceDTO
     {
         [Required]
         public byte[]? DriverLicenceFirst { get; set; }

@@ -36,21 +36,21 @@ namespace BookAndDrive.API.Controllers
 
         //[Authorize]
         [HttpPut("{id}")]
-        public IActionResult UpdateUser(int id, [FromBody] UserInfoDto userDto)
+        public IActionResult UpdateUser(int id, [FromBody] UserInfoDTO userDTO)
         {
             var user = _db.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
                 return NotFound("User not found");
 
-            user.FirstName = userDto.FirstName;
-            user.LastName = userDto.LastName;
-            user.Email = userDto.Email;
-            user.PhoneNumber = userDto.PhoneNumber;
+            user.FirstName = userDTO.FirstName;
+            user.LastName = userDTO.LastName;
+            user.Email = userDTO.Email;
+            user.PhoneNumber = userDTO.PhoneNumber;
 
-            if (!string.IsNullOrEmpty(userDto.Password))
+            if (!string.IsNullOrEmpty(userDTO.Password))
             {
-                user.Password = HashPassword(userDto.Password);
+                user.Password = HashPassword(userDTO.Password);
             }
 
             _db.Users.Update(user);
@@ -76,15 +76,15 @@ namespace BookAndDrive.API.Controllers
 
         //[Authorize(Roles = "User")]
         [HttpPost("{id}/upload-licence")]
-        public IActionResult UploadDriverLicence(int id, [FromBody] UserDriverLicenceDto licenceDto)
+        public IActionResult UploadDriverLicence(int id, [FromBody] UserDriverLicenceDTO licenceDTO)
         {
             var user = _db.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
                 return NotFound("User not Found.");
 
-            user.DriverLicenceFirst = licenceDto.DriverLicenceFirst;
-            user.DriverLicenceSecond = licenceDto.DriverLicenceSecond;
+            user.DriverLicenceFirst = licenceDTO.DriverLicenceFirst;
+            user.DriverLicenceSecond = licenceDTO.DriverLicenceSecond;
             user.IsDriverLicenceVerified = false;
 
             _db.Users.Update(user);

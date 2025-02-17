@@ -23,18 +23,18 @@ namespace BookAndDrive.Infrastructure.Services
             _config = config;
         }
 
-        public async Task<bool> RegisterUserAsync(RegisterUserDto userDto)
+        public async Task<bool> RegisterUserAsync(RegisterUserDTO userDTO)
         {
-            if (await _db.Users.AnyAsync(u => u.Email == userDto.Email))
+            if (await _db.Users.AnyAsync(u => u.Email == userDTO.Email))
                 return false;
 
             var user = new User
             {
-                FirstName = userDto.FirstName,
-                LastName = userDto.LastName,
-                Email = userDto.Email,
-                Password = HashPassword(userDto.Password),
-                PhoneNumber = userDto.PhoneNumber
+                FirstName = userDTO.FirstName,
+                LastName = userDTO.LastName,
+                Email = userDTO.Email,
+                Password = HashPassword(userDTO.Password),
+                PhoneNumber = userDTO.PhoneNumber
             };
 
             await _db.Users.AddAsync(user);
@@ -42,11 +42,11 @@ namespace BookAndDrive.Infrastructure.Services
             return true;
         }
 
-        public async Task<string> LoginUserAsync(LoginUserDto userDto)
+        public async Task<string> LoginUserAsync(LoginUserDTO userDTO)
         {
-            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == userDto.Email);
+            var user = await _db.Users.FirstOrDefaultAsync(u => u.Email == userDTO.Email);
 
-            if (user == null || user.Password != HashPassword(userDto.Password))
+            if (user == null || user.Password != HashPassword(userDTO.Password))
                 return null;
 
             var tokenHandler = new JwtSecurityTokenHandler();

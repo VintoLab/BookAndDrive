@@ -9,7 +9,7 @@ namespace BookAndDrive.Application.Interfaces
 {
     public interface IAccountService
     {
-        Task<bool> RegisterUserAsync(RegisterUserDto userDto);
-        Task<string> LoginUserAsync(LoginUserDto userDto);
+        Task<bool> RegisterUserAsync(RegisterUserDTO userDTO);
+        Task<string> LoginUserAsync(LoginUserDTO userDTO);
     }
 }

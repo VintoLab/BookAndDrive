@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BookAndDrive.Application.DTOs
 {
-    public class RegisterUserDto
+    public class RegisterUserDTO
     {
         [Required]
         public string FirstName { get; set; }
