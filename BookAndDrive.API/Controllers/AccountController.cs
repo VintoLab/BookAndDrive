@@ -22,7 +22,7 @@ namespace BookAndDrive.API.Controllers
             if (!result)
                 return BadRequest("Email is used.");
 
-            return Ok("Register Successfully.");
+            return Ok();
         }
 
         [HttpPost("login")]
@@ -30,7 +30,7 @@ namespace BookAndDrive.API.Controllers
         {
             var token = await _accountService.LoginUserAsync(userDTO);
             if (token == null)
-                return Unauthorized("Incorect login or password.");
+                return Unauthorized("Incorect email or password.");
 
             return Ok(new { Token = token });
         }
