@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookAndDrive.Application.DTOs
+namespace BookAndDrive.Application.DTOs.Car
 {
     public class CreateCarDTO
     {

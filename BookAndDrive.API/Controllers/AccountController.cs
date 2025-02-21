@@ -1,4 +1,4 @@
-﻿using BookAndDrive.Application.DTOs;
+﻿using BookAndDrive.Application.DTOs.Account;
 using BookAndDrive.Application.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 

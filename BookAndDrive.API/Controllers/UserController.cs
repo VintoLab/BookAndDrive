@@ -1,4 +1,4 @@
-﻿using BookAndDrive.Application.DTOs;
+﻿using BookAndDrive.Application.DTOs.User;
 using BookAndDrive.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;

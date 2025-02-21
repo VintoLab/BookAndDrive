@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BookAndDrive.Application.DTOs
+namespace BookAndDrive.Application.DTOs.User
 {
-    public class LoginUserDTO
+    public class UserDriverLicenceDTO
     {
         [Required]
-        public string Email { get; set; }
+        public byte[]? DriverLicenceFirst { get; set; }
         [Required]
-        public string Password { get; set; }
+        public byte[]? DriverLicenceSecond { get; set; }
     }
 }

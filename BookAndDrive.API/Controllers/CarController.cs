@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using BookAndDrive.Infrastructure.Data;
-using BookAndDrive.Application.DTOs;
 using BookAndDrive.Domain.Entities;
+using BookAndDrive.Application.DTOs.Car;
 
 
 namespace BookAndDrive.API.Controllers
