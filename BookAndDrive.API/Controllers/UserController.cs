@@ -38,6 +38,9 @@ namespace BookAndDrive.API.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateUser(int id, [FromBody] UserInfoDTO userDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var user = _db.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)
@@ -78,6 +81,9 @@ namespace BookAndDrive.API.Controllers
         [HttpPost("{id}/upload-licence")]
         public IActionResult UploadDriverLicence(int id, [FromBody] UserDriverLicenceDTO licenceDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var user = _db.Users.FirstOrDefault(u => u.Id == id);
 
             if (user == null)

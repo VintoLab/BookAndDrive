@@ -35,7 +35,7 @@ namespace BookAndDrive.API.Controllers
         [HttpPost]
         public IActionResult CreateCarStatus([FromBody] CarStatusesDTO carStatusDTO)
         {
-            if (carStatusDTO == null || string.IsNullOrEmpty(carStatusDTO.Name))
+            if (carStatusDTO == null || string.IsNullOrEmpty(carStatusDTO.Name) || !ModelState.IsValid)
                 return BadRequest("Invalid data");
 
             var newCarStatus = new CarStatus
@@ -52,7 +52,7 @@ namespace BookAndDrive.API.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateCarStatus(int id, [FromBody] CarStatusesDTO carStatusDTO)
         {
-            if (carStatusDTO == null || string.IsNullOrEmpty(carStatusDTO.Name))
+            if (carStatusDTO == null || string.IsNullOrEmpty(carStatusDTO.Name) || !ModelState.IsValid)
                 return BadRequest("Invalid data");
 
             var carStatus = _db.CarStatuses.FirstOrDefault(ct => ct.Id == id);
