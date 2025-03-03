@@ -23,6 +23,7 @@ builder.Services.AddCors(options =>
                         .AllowAnyMethod());
 });
 
+builder.Services.AddScoped<PaymentService>();
 builder.Services.AddScoped<IAccountService, AccountService>();
 builder.Services.AddAuthentication(options =>
 {
