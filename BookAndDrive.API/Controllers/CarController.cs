@@ -34,7 +34,8 @@ namespace BookAndDrive.API.Controllers
                     Year = c.Year,
                     VIN = c.VIN,
                     Price = c.Price,
-                    CarStatusName = c.CarStatus.Name
+                    CarStatusName = c.CarStatus.Name,
+                    Photo = c.Photo
                 }).ToList();
 
             return Ok(cars);
@@ -56,14 +57,15 @@ namespace BookAndDrive.API.Controllers
                     Year = c.Year,
                     VIN = c.VIN,
                     Price = c.Price,
-                    CarStatusName = c.CarStatus.Name
+                    CarStatusName = c.CarStatus.Name,
+                    Photo = c.Photo
                 }).FirstOrDefault(c => c.Id == id);
 
             return car == null ? NotFound() : Ok(car);
         }
 
         [HttpPost]
-        public IActionResult CreateCar([FromBody] CreateCarDTO carDto)
+        public IActionResult CreateCar([FromForm] CreateCarDTO carDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -89,6 +91,13 @@ namespace BookAndDrive.API.Controllers
                 CarStatusId = carDto.CarStatusId
             };
 
+            if (carDto.Photo != null && carDto.Photo.Length > 0)
+            {
+                using var memoryStream = new MemoryStream();
+                carDto.Photo.CopyTo(memoryStream);
+                car.Photo = memoryStream.ToArray();
+            }
+
             _db.Cars.Add(car);
             _db.SaveChanges();
 
@@ -109,7 +118,7 @@ namespace BookAndDrive.API.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCar(int id, [FromBody] CreateCarDTO carDto)
+        public IActionResult UpdateCar(int id, [FromForm] CreateCarDTO carDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -135,6 +144,16 @@ namespace BookAndDrive.API.Controllers
             car.VIN = carDto.VIN;
             car.Price = carDto.Price;
             car.CarStatusId = carDto.CarStatusId;
+
+            if (carDto.Photo != null && carDto.Photo.Length > 0)
+            {
+                using var memoryStream = new MemoryStream();
+                carDto.Photo.CopyTo(memoryStream);
+                car.Photo = memoryStream.ToArray();
+            }
+            else if (carDto.Photo == null)
+            {
+            }
 
             _db.SaveChanges();
 
@@ -166,6 +185,19 @@ namespace BookAndDrive.API.Controllers
             _db.SaveChanges();
 
             return NoContent();
+        }
+
+        [HttpDelete("{id}/photo")]
+        public IActionResult DeleteCarPhoto(int id)
+        {
+            var car = _db.Cars.FirstOrDefault(c => c.Id == id);
+            if (car == null)
+                return NotFound();
+
+            car.Photo = null;
+            _db.SaveChanges();
+
+            return Ok("Photo deleted successfully.");
         }
     }
 }

@@ -34,5 +34,7 @@ namespace BookAndDrive.Domain.Entities
         [ValidateNever]
         public CarStatus CarStatus { get; set; }
 
+        public byte[]? Photo { get; set; }
+
     }
 }

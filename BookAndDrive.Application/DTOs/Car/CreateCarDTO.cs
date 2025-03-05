@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -27,5 +28,6 @@ namespace BookAndDrive.Application.DTOs.Car
         public decimal Price { get; set; }
         [Required]
         public int CarStatusId { get; set; }
+        public IFormFile? Photo { get; set; }
     }
 }

@@ -2,6 +2,7 @@ using BookAndDrive.Application.Interfaces;
 using BookAndDrive.Infrastructure.Data;
 using BookAndDrive.Infrastructure.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
@@ -21,6 +22,11 @@ builder.Services.AddCors(options =>
         policy => policy.WithOrigins("http://localhost:4200") // Angular dev server
                         .AllowAnyHeader()
                         .AllowAnyMethod());
+});
+
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 104857600; // 100 MB
 });
 
 builder.Services.AddScoped<PaymentService>();
