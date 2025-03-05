@@ -4,6 +4,7 @@ using BookAndDrive.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookAndDrive.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250226135653_test")]
+    partial class test
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -108,30 +111,6 @@ namespace BookAndDrive.Infrastructure.Migrations
                             Transmission = "Automatic",
                             VIN = "12345678912345678",
                             Year = 2024
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Brand = "Renault",
-                            CarStatusId = 2,
-                            CarTypeId = 1,
-                            Price = 10.0m,
-                            Seats = 5,
-                            Transmission = "Manual",
-                            VIN = "12345678912345679",
-                            Year = 2024
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Brand = "Renault",
-                            CarStatusId = 3,
-                            CarTypeId = 1,
-                            Price = 10.0m,
-                            Seats = 4,
-                            Transmission = "Manual",
-                            VIN = "12345678912345671",
-                            Year = 2024
                         });
                 });
 
@@ -156,16 +135,6 @@ namespace BookAndDrive.Infrastructure.Migrations
                         {
                             Id = 1,
                             Name = "Available"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Booked"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Service"
                         });
                 });
 
@@ -189,27 +158,7 @@ namespace BookAndDrive.Infrastructure.Migrations
                         new
                         {
                             Id = 1,
-                            Name = "City"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Large City"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Electric"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Small Van"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Large Van"
+                            Name = "Van"
                         });
                 });
 

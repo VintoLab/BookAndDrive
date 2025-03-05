@@ -35,16 +35,46 @@ namespace BookAndDrive.Infrastructure.Data
                 {
                     Id = 1,
                     Name = "Available",
+                },
+                new CarStatus
+                {
+                    Id = 2,
+                    Name = "Booked",
+                },
+                new CarStatus
+                {
+                    Id = 3,
+                    Name = "Service",
                 }
-                );
+            );
 
             modelBuilder.Entity<CarType>().HasData(
                 new CarType
                 {
                     Id = 1,
-                    Name = "Van",
+                    Name = "City",
+                },
+                new CarType
+                {
+                    Id = 2,
+                    Name = "Large City",
+                },
+                new CarType
+                {
+                    Id = 3,
+                    Name = "Electric",
+                },
+                new CarType
+                {
+                    Id = 4,
+                    Name = "Small Van",
+                },
+                new CarType
+                {
+                    Id = 5,
+                    Name = "Large Van",
                 }
-                );
+            );
 
             modelBuilder.Entity<Car>().HasData(
                 new Car
@@ -58,8 +88,54 @@ namespace BookAndDrive.Infrastructure.Data
                     Price = 10.0M,
                     CarTypeId = 1,
                     CarStatusId = 1
+                },
+                new Car
+                {
+                    Id = 2,
+                    Seats = 5,
+                    Transmission = "Manual",
+                    Brand = "Renault",
+                    Year = 2024,
+                    VIN = "12345678912345679",
+                    Price = 10.0M,
+                    CarTypeId = 1,
+                    CarStatusId = 2
+                },
+                new Car
+                {
+                    Id = 3,
+                    Seats = 4,
+                    Transmission = "Manual",
+                    Brand = "Renault",
+                    Year = 2024,
+                    VIN = "12345678912345671",
+                    Price = 10.0M,
+                    CarTypeId = 1,
+                    CarStatusId = 3
                 }
-                );
+            );
+
+            modelBuilder.Entity<User>().HasData(
+                new User
+                {
+                    Id = 1,
+                    FirstName = "Tom",
+                    LastName = "Vinto",
+                    Email = "tomvinto@gmail.com",
+                    Password = "479b0b6509920e075f50000e3a1f6deb44a50303c9d8ecfa66f4ff16e66e60a2", //qwerty1!
+                    PhoneNumber = "+380231231231",
+                },
+                new User
+                {
+                    Id = 2,
+                    FirstName = "Alex",
+                    LastName = "Vinto",
+                    Email = "alexvinto@gmail.com",
+                    Password = "479b0b6509920e075f50000e3a1f6deb44a50303c9d8ecfa66f4ff16e66e60a2", //qwerty1!
+                    PhoneNumber = "+380631887836",
+                    Role = "Admin"
+                }
+            );
         }
 
     }

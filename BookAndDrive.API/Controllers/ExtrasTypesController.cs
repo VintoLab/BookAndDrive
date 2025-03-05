@@ -66,11 +66,12 @@ namespace BookAndDrive.API.Controllers
                 return BadRequest(ModelState);
 
             var extraType = _db.ExtraTypes.FirstOrDefault(et => et.Id == id);
+            
             if (extraType == null)
                 return NotFound();
 
-            if (_db.ExtraTypes.Any(et => et.Name == extraTypeDto.Name && et.Id != id))
-                return BadRequest("Extra type with this name already exists");
+            if (_db.ExtraTypes.Any(et => et.Name == extraTypeDto.Name && et.Id == id))
+                return BadRequest("Extras type with this name already exists");
 
             extraType.Name = extraTypeDto.Name;
             extraType.Price = extraTypeDto.Price;
