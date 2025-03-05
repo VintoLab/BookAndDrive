@@ -18,6 +18,9 @@ namespace BookAndDrive.API.Controllers
         [HttpPost("register")]
         public async Task<IActionResult> RegisterUser([FromBody] RegisterUserDTO userDTO)
         {
+            if (!ModelState.IsValid)
+                return BadRequest("Invalid data provided.");
+
             var result = await _accountService.RegisterUserAsync(userDTO);
             if (!result)
                 return BadRequest("Email is used.");
@@ -28,6 +31,9 @@ namespace BookAndDrive.API.Controllers
         [HttpPost("login")]
         public async Task<IActionResult> LoginUser([FromBody] LoginUserDTO userDTO)
         {
+            if(!ModelState.IsValid)
+                return BadRequest("Invalid data provided.");
+
             var token = await _accountService.LoginUserAsync(userDTO);
             if (token == null)
                 return Unauthorized("Incorect email or password.");

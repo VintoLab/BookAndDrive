@@ -9,6 +9,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BookAndDrive.Infrastructure.Services
 {
@@ -26,6 +27,13 @@ namespace BookAndDrive.Infrastructure.Services
         public async Task<bool> RegisterUserAsync(RegisterUserDTO userDTO)
         {
             if (await _db.Users.AnyAsync(u => u.Email == userDTO.Email))
+                return false;
+
+            var emailRegex = new Regex(@"^[^@\s]+@[^@\s]+\.[^@\s]+$");
+            if (!emailRegex.IsMatch(userDTO.Email))
+                return false;
+
+            if (userDTO.Password != userDTO.ConfirmPassword)
                 return false;
 
             var user = new User

@@ -20,6 +20,8 @@ namespace BookAndDrive.Application.DTOs.Account
         [MinLength(8)]
         public string Password { get; set; }
         [Required]
+        public string ConfirmPassword { get; set; }
+        [Required]
         public string PhoneNumber { get; set; }
     }
 }

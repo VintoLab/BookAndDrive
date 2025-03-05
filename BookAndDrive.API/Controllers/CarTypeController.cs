@@ -35,7 +35,7 @@ namespace BookAndDrive.API.Controllers
         [HttpPost]
         public IActionResult CreateCarType([FromBody] CarTypesDTO carTypeDTO)
         {
-            if (carTypeDTO == null || string.IsNullOrEmpty(carTypeDTO.Name))
+            if (carTypeDTO == null || string.IsNullOrEmpty(carTypeDTO.Name) || !ModelState.IsValid)
                 return BadRequest("Invalid data");
 
             var newCarType = new CarType
@@ -52,7 +52,7 @@ namespace BookAndDrive.API.Controllers
         [HttpPut("{id}")]
         public IActionResult UpdateCarType(int id, [FromBody] CarTypesDTO carTypeDTO)
         {
-            if (carTypeDTO == null || string.IsNullOrEmpty(carTypeDTO.Name))
+            if (carTypeDTO == null || string.IsNullOrEmpty(carTypeDTO.Name) || !ModelState.IsValid)
                 return BadRequest("Invalid data");
 
             var carType = _db.CarTypes.FirstOrDefault(ct => ct.Id == id);
