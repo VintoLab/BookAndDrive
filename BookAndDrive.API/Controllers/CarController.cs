@@ -19,25 +19,22 @@ namespace BookAndDrive.API.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetCars([FromQuery] string? carStatus = null, 
-                                     [FromQuery] string? carType = null, 
+        public IActionResult GetCars([FromQuery] int? carStatus = null, 
+                                     [FromQuery] int? carType = null, 
                                      [FromQuery] string? transmission = null)
         {
-            var query = _db.Cars
-                .Include(c => c.CarType)
-                .Include(c => c.CarStatus)
-                .AsQueryable();
+            var query = _db.Cars.AsQueryable();
 
-            if (!string.IsNullOrEmpty(carStatus))
-                query = query.Where(c => c.CarStatus.Name == carStatus);
+            if (carStatus != null)
+                query = query.Where(c => c.CarStatusId == carStatus);
 
-            if (!string.IsNullOrEmpty(carType))
-                query = query.Where(c => c.CarType.Name == carType);
+            if (carType != null)
+                query = query.Where(c => c.CarTypeId == carType);
 
             if (!string.IsNullOrEmpty(transmission))
                 query = query.Where(c => c.Transmission == transmission);
 
-            var cars = _db.Cars
+            var cars = query
                 .Include(c => c.CarType)
                 .Include(c => c.CarStatus)
                 .Select(c => new GetCarInfoDTO
