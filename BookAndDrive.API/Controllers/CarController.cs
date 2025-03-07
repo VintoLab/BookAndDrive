@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using BookAndDrive.Infrastructure.Data;
 using BookAndDrive.Domain.Entities;
 using BookAndDrive.Application.DTOs.Car;
+using System.Threading.Tasks;
 
 
 namespace BookAndDrive.API.Controllers
@@ -78,7 +79,7 @@ namespace BookAndDrive.API.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateCar([FromForm] CreateCarDTO carDto)
+        public async Task<IActionResult> CreateCar([FromForm] CreateCarDTO carDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -106,9 +107,7 @@ namespace BookAndDrive.API.Controllers
 
             if (carDto.Photo != null && carDto.Photo.Length > 0)
             {
-                using var memoryStream = new MemoryStream();
-                carDto.Photo.CopyTo(memoryStream);
-                car.Photo = memoryStream.ToArray();
+                car.Photo = await ConvertFileToBase64String(carDto.Photo);
             }
 
             _db.Cars.Add(car);
@@ -124,14 +123,15 @@ namespace BookAndDrive.API.Controllers
                 Year = car.Year,
                 VIN = car.VIN,
                 Price = car.Price,
-                CarStatusName = carStatus.Name
+                CarStatusName = carStatus.Name,
+                Photo = car.Photo
             };
 
             return CreatedAtAction(nameof(GetCar), new { id = car.Id }, response);
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdateCar(int id, [FromForm] CreateCarDTO carDto)
+        public async Task<IActionResult> UpdateCar(int id, [FromForm] CreateCarDTO carDto)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -160,9 +160,7 @@ namespace BookAndDrive.API.Controllers
 
             if (carDto.Photo != null && carDto.Photo.Length > 0)
             {
-                using var memoryStream = new MemoryStream();
-                carDto.Photo.CopyTo(memoryStream);
-                car.Photo = memoryStream.ToArray();
+                car.Photo = await ConvertFileToBase64String(carDto.Photo);
             }
             else if (carDto.Photo == null)
             {
@@ -180,7 +178,8 @@ namespace BookAndDrive.API.Controllers
                 Year = car.Year,
                 VIN = car.VIN,
                 Price = car.Price,
-                CarStatusName = carStatus.Name
+                CarStatusName = carStatus.Name,
+                Photo = car.Photo
             };
 
             return Ok(response);
@@ -211,6 +210,13 @@ namespace BookAndDrive.API.Controllers
             _db.SaveChanges();
 
             return Ok("Photo deleted successfully.");
+        }
+
+        private static async Task<string> ConvertFileToBase64String(IFormFile file)
+        {
+            using var memoryStream = new MemoryStream();
+            await file.CopyToAsync(memoryStream);
+            return Convert.ToBase64String(memoryStream.ToArray());
         }
     }
 }

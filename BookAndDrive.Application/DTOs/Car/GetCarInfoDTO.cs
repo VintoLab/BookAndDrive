@@ -18,6 +18,6 @@ namespace BookAndDrive.Application.DTOs.Car
         public string VIN { get; set; }
         public decimal Price { get; set; }
         public string CarStatusName { get; set; }
-        public byte[]? Photo { get; set; }
+        public string? Photo { get; set; }
     }
 }

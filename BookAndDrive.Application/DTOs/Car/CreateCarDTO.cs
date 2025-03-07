@@ -13,7 +13,7 @@ namespace BookAndDrive.Application.DTOs.Car
         [Required]
         public int CarTypeId { get; set; }
         [Required]
-        [MinLength(0)]
+        //[MinLength(0)]
         public int Seats { get; set; }
         [Required]
         public string Transmission { get; set; }
